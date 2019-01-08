@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Artists</title>
+</head>
+<body>
+<table>
+    <thead>
+    <td>ID</td>
+    <td>Full Name</td>
+    <td>Email</td>
+    <td>Photo</td>
+    </thead>
+    <tbody>
+    <tr th:each="obj : ${allObjects}">
+        <td> <span th:text="${obj.artistId}">ID</span> </td>
+        <td> <span th:text="${obj.artistFullName}">NAME</span> </td>
+        <td> <span th:text="${obj.artistEmail}">EMAIL</span> </td>
+        <td> <img th:src="@{'data:image/jpeg;base64,'+${obj.photo}}" width="100" height="100"/>IMAGE</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

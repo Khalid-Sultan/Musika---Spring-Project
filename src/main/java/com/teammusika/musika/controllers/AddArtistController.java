@@ -1,7 +1,5 @@
 package com.teammusika.musika.controllers;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +24,15 @@ public class AddArtistController {
     public String processOrder(
             @RequestParam("artistName") String artistFullName,
             @RequestParam("artistPhoto") MultipartFile artistPhoto,
-            @RequestParam("artistEmail") String artistEmail) throws IOException{
+            @RequestParam("artistEmail") String artistEmail){
+        try {
             byte[] artistPhotoBytes = artistPhoto.getBytes();
             artistRepositoryService.storeFile(artistFullName,artistPhotoBytes,artistEmail);
             return "redirect:/";
+        }
+        catch(Exception ex) {
+            return "redirect:/ErrorAddArtist";
+        }
     }
 
 }

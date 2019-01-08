@@ -44,7 +44,8 @@ public class UploadController {
 			@RequestParam("coverFile") MultipartFile coverFile, 
 			@RequestParam("songTitle") String title,
 			@RequestParam("songArtist") String artistName,
-			@RequestParam("songAlbum") String albumName) throws IOException {
+			@RequestParam("songAlbum") String albumName) {
+		try {
 			byte[] songFileBytes = song.getBytes();
 			byte[] songCoverBytes = coverFile.getBytes();
 			String[] artists  = artistName.split(",");
@@ -53,7 +54,12 @@ public class UploadController {
                 artistNames.add(s);
             }
 			Song savedSong = songRepositoryService.storeFile(songFileBytes,artistNames,albumName,title,songCoverBytes);
+			if(savedSong==null) return "redirect:/ErrorInvalidArtist";
 			return "redirect:/admin";
+		}
+		catch(IOException ex) {
+			return "redirect:/ErrorUploadSong";
+		}
 	}
 
 }

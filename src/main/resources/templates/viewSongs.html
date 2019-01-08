@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Songs</title>
+</head>
+<body>
+<table>
+    <thead>
+    <td>ID</td>
+    <td>Title</td>
+    <td>Album Name</td>
+    <td>Likes</td>
+    <td>File</td>
+    <td>Cover</td>
+    </thead>
+    <tbody>
+    <tr th:each="obj : ${songModel}">
+        <td> <span th:text="${obj.songId}">SONG</span> </td>
+        <td> <span th:text="${obj.songTitle}">SONG</span> </td>
+        <td> <span th:text="${obj.songAlbumName}">SONG</span> </td>
+        <td> <span th:text="${obj.songLikes}">SONG</span> </td>
+        <td>
+            <form method="get" action="/admin/viewSongs/{obj}">
+                <audio controls>
+                    <source th:src="@{'data:audio/mp3;base64,'+${obj.songFile}}" type="audio/mp3"/>
+                </audio>
+            </form>
+        </td>
+        <td> <img th:src="@{'data:image/jpeg;base64,'+${obj.songCover}}" width="100" height="100"/></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
