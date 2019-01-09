@@ -115,7 +115,32 @@
            <div class="main">
     
     <div class="container">
-   <h2>Admin dashboard</h2>
+    <form method="POST" enctype="multipart/form-data" th:object="${artistArray}">
+
+        <h3>Deliver my song masterpieces to...</h3>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Song Name: </label>
+            <input type="text" id="singleFileTitleInput" name="songTitle"/>
+        </div>
+        <div class="form-group row">
+            <label for="singleFileArtistInput" class="col-sm-2 col-form-label">Artist Name: </label>
+            <input type="text" id="singleFileArtistInput" name="songArtist"/>
+        </div>
+        <div class="form-group row">
+            <label for="singleFileAlbumInput" class="col-sm-2 col-form-label">Album Name: </label>
+            <input type="text" id="singleFileAlbumInput" name="songAlbum"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Song File: </label>
+            <input type="file" id="singleFileUploadInput" name="songFile" />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Cover Photo: </label>
+            <input type="file" id="singleFileCoverInput" name="coverFile"/>
+        </div>
+        <input type="submit" value="Submit order"/>
+    </form>
+      
   </div>       
 
         </div>

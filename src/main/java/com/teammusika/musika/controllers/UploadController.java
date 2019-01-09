@@ -28,7 +28,7 @@ public class UploadController {
 
 	@GetMapping
 	public String uploadForm() {
-		return "uploadForm";
+		return "uploadSong";
 	}
 
 	@ModelAttribute
