@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ViewSongsController {
@@ -61,16 +62,22 @@ public class ViewSongsController {
         return "index";
     }
 
-    @RequestMapping(value = "/home/{obj}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public void getMedia(@PathVariable("obj.songFile") String file,HttpServletRequest request, HttpServletResponse response) throws IOException{
-        byte[] audio = org.springframework.util.Base64Utils.decodeFromString(file);
-        InputStream inputStream = new ByteArrayInputStream(audio);
-        IOUtils.copy(inputStream,response.getOutputStream());
-        response.flushBuffer();
+    @RequestMapping(value = "/home/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response){
+    	try {
+            byte[] audio = org.springframework.util.Base64Utils.decodeFromString(file);
+            InputStream inputStream = new ByteArrayInputStream(audio);
+            IOUtils.copy(inputStream,response.getOutputStream());
+            response.flushBuffer();    		
+    	}
+    	catch(Exception ex) {
+    		System.out.println(ex.getMessage().toString());
+    	}
     }
     
 //	@PostMapping
 //	public void count(Model model) {
 //		System.out.println("out stream");
 //	}
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -50,5 +51,9 @@ public class SongRepositoryService {
     }
     public List<Song> findAll(){
         return songRepository.findAll();
+        
+    }
+    public Optional<Song> findByID(Long Id){
+        return songRepository.findById(Id);
     }
 }
