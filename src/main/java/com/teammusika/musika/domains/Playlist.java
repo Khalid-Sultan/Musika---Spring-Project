@@ -1,23 +1,35 @@
 package com.teammusika.musika.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="playlist",schema="musika_my")
+@Table(name="playlist",schema="my_musika")
 public class Playlist {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long playlistId;
+	
 
-	private String playlistName;
+//@NotNull
+//	@ManyToMany
+//	private User user;
+	
+	@NotNull
+	@Size(min=5, message="Name must be at least 5 characters long")
+	private String playlist_name;
+	@ManyToMany(targetEntity=Song.class)
+	@Size(min=1, message="You must choose at least 1 Song")
+	private Set<Song> songs= new HashSet<>();
 
-//	@ManyToMany(targetEntity=Song.class)
-//	private Set<String> playlistSongNames = new HashSet<>();
 }

@@ -1,8 +1,13 @@
 package com.teammusika.musika.repositories;
 
-import com.teammusika.musika.domains.Playlist;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
-public interface PlaylistRepository extends CrudRepository<Playlist,Long> {
+import com.teammusika.musika.domains.Playlist;
 
+public interface PlaylistRepository extends CrudRepository<Playlist, Long> {
+
+	@Override
+	 List<Playlist> findAll();
 }
