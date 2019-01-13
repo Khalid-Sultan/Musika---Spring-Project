@@ -11,7 +11,7 @@ import com.teammusika.musika.services.ArtistRepositoryService;
 
 import java.util.*;
 @Controller
-public class ViewArtistsController {
+public class ViewArtistsAdminController {
     class Objected{
         public String photo;
         public Long artistId;
@@ -46,9 +46,9 @@ public class ViewArtistsController {
         model.addAttribute("allObjects",objecteds);
     }
 
-    @GetMapping("/viewArtists")
+    @GetMapping("/admin/viewArtists")
     public String home(Model model) {
-        return "viewArtists";
+        return "viewArtistsAdmin";
     }
 }
 

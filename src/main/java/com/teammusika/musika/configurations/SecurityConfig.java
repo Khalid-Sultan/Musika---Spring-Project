@@ -34,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     .antMatchers("/").permitAll()
 	     .antMatchers("/login").permitAll()
 	     .antMatchers("/registration").permitAll()
-	     .antMatchers("index","/viewArtists","/playlist").hasAuthority("MUSIKAUSER")
-	     .antMatchers("admin/*","/ErrorInvalidArtist","/ErrorUploadSong").hasAuthority("MUSIKAADMIN")
+	     .antMatchers("/index","/viewArtists","/playlist").hasAuthority("MUSIKAUSER")
+	     .antMatchers("/admin","/admin/*").hasAuthority("MUSIKAADMIN")
 	   
 	     .anyRequest().authenticated()
 	     .and()
@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     			.logoutSuccessUrl("/")
      	.and()
 	     	.exceptionHandling()
-	     	.accessDeniedPage("/access-denied");
+	     	.accessDeniedPage("/AccessDenied");
 }
 	
 	 @Override

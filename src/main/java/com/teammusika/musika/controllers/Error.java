@@ -17,4 +17,8 @@ public class Error {
     public String ErrorInvalidArtist() {
         return "ErrorInvalidArtist";
     }
+    @GetMapping("/AccessDenied")
+    public String AccessDenied() {
+        return "ErrorAccessDenied";
+    }
 }

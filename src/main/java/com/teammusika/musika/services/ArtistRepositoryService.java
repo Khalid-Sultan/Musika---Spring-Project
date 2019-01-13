@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-
-@Slf4j
+ 
 @Service
 public class ArtistRepositoryService {
 
-    @Autowired
     private ArtistRepository artistRepository;
-
+    @Autowired
+    public ArtistRepositoryService(ArtistRepository artistRepository) {
+    	this.artistRepository = artistRepository;
+    }
     public Artist storeFile(String fullName, byte[] artistPhoto, String email) {
         Artist artist = new Artist(fullName,artistPhoto,email);
         return artistRepository.save(artist);

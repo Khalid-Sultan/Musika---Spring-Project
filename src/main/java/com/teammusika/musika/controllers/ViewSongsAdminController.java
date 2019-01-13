@@ -58,7 +58,7 @@ public class ViewSongsAdminController {
 
     @GetMapping("/admin/viewSongs")
     public String home(Model model) {
-        return "viewSongs";
+        return "viewSongsAdmin";
     }
 
     @RequestMapping(value = "/admin/viewSongs/{obj}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)

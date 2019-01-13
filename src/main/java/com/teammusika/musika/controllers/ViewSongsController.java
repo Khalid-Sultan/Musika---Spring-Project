@@ -57,9 +57,12 @@ public class ViewSongsController {
         model.addAttribute("songModel",objecteds);
     }
 
- 
+    @GetMapping("/home")
+    public String home(Model model) {
+        return "index";
+    }
 
-    @RequestMapping(value = "/index/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @RequestMapping(value = "/home/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response){
     	try {
             byte[] audio = org.springframework.util.Base64Utils.decodeFromString(file);
