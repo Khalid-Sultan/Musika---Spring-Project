@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan({"com.teammusika.musika.domains"})
+
 @EnableJpaRepositories({"com.teammusika.musika.repositories"})
 public class MainApplication {
 

@@ -1,0 +1,21 @@
+#sidebar_wrapper{
+	z-index: 1;
+	position: absolute;
+	height: 100%;
+	transition: 0.2s;
+	overflow: hidden;
+	width: 0;
+
+}
+#main-wrapper{
+	width: 100%;
+	transition: 0.2s;
+	position: absolute;
+}
+#wrapper.menuDisplayed #sidebar_wrapper{
+	width: 250px;
+}
+#wrapper.menuDisplayed #main-wrapper{
+	padding-left: 250px;
+	transition: 0.2s;
+}

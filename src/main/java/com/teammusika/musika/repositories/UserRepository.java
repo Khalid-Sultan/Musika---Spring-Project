@@ -1,8 +1,9 @@
 package com.teammusika.musika.repositories;
 
-import com.teammusika.musika.domains.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<User, String> {
+import com.teammusika.musika.security.User;
 
+public interface UserRepository extends CrudRepository<User, Long> {
+	User findByUsername(String username);
 }

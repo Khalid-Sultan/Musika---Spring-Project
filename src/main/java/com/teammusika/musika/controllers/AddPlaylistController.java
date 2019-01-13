@@ -103,7 +103,7 @@ public class AddPlaylistController {
 		System.out.println("out");
 		Playlist savedTaco=playListRepository.save(myPlaylist);
 		
-		return "redirect:/home";
+		return "redirect:/index";
 		
 	}
 }
