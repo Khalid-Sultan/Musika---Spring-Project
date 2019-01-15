@@ -55,6 +55,23 @@ span {
     display: inline-block;
 }
 /* ---------------------------------------------------
+    Landing
+----------------------------------------------------- */
+.landing{
+        width: 50%;
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 24%
+}
+.landing_h1{
+        margin-bottom: 15%;
+    color: white;
+    font-size: 60px;
+}
+.landing_btn{
+    margin-left: 27%;
+}
+/* ---------------------------------------------------
     Navigation STYLE
 ----------------------------------------------------- */
 .navbar{

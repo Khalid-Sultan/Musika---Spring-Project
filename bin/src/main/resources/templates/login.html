@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -22,33 +23,41 @@
 
 </head>
 
-<body class="login-img3-body">
+<body class="login-img3-body" >
 
   <div class="container">
 
-    <form class="login-form" action="home">
+    <form th:action="@{/login}" th:method="POST" class="login-form">
       <div class="login-wrap">
+      <span th:text="${successMessage}"></span>
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
           <span class="input-group-addon login_icon_span"><i class="icon_profile login_icons"></i></span>
-          <input type="text" class="form-control login_icon_span" placeholder="Username" autofocus>
+          <input type="text" id="username" name="username"  th:placeholder="UserName" class="form-control">
         </div>
         <div class="input-group">
           <span class="input-group-addon login_icon_span"><i class="icon_key_alt login_icons"></i></span>
-          <input type="password" class="form-control login_icon_span" placeholder="Password">
+          <input  type="password"
+					th:placeholder="Password" id="password" name="password"
+					class="form-control">
         </div>
+        <div class="text-danger" align="center" th:if="${param.error}">
+				<p>Username or Password invalid, please verify</p>
+			</div>
         <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
             </label>
-        <button class="btn btn-warning btn-lg btn-block btn-login" type="submit">Login</button>
-        <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
-      </div>
+        <button class="btn btn-primary btn-block" name="submit" value="Login" type="submit" th:text="Login"></button>
+
     </form>
-    
+    	<form th:action="@{/registration}" th:method="GET">
+			<button class="btn btn-md btn-warning btn-block" type="Submit">Register</button>
+		</form>
+		
   </div>
 
 
 </body>
-
+	
 </html>

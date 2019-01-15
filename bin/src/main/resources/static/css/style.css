@@ -15,6 +15,10 @@ p {
     line-height: 1.7em;
     color: #999;
 }
+.reg_label{
+	
+	color:white;
+}
 
 a,
 a:hover,
@@ -401,7 +405,14 @@ top-nav ul.top-menu > li .dropdown-menu.logout {
 }
 .login-form .input-group {
     padding-bottom: 15px;
+   
 }
+.login-form .input-password{
+	width:275px;
+	marign-right:80px;
+	padding-bottom: 15px;
+}
+
 .login-form .checkbox {
     font-weight: normal;
     font-weight: 300;
@@ -424,6 +435,9 @@ top-nav ul.top-menu > li .dropdown-menu.logout {
 }
 .btn-login{
     background:  #e3a106;
+}
+.signup_header >p{
+	color:red;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES
