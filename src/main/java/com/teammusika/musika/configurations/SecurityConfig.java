@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService)
 		.passwordEncoder(bCryptPasswordEncoder);
 	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		 http.authorizeRequests()
@@ -35,14 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     .antMatchers("/login").permitAll()
 	     .antMatchers("/registration").permitAll()
 	     .antMatchers("/index","/viewArtists","/playlist").hasAuthority("MUSIKAUSER")
-	     .antMatchers("/admin","/admin/*").hasAuthority("MUSIKAADMIN")
+	     .antMatchers("/admin","/admin/**").hasAuthority("MUSIKAADMIN")
 	   
 	     .anyRequest().authenticated()
 	     .and()
 	     	.formLogin()
 	     			.loginPage("/login")
-	     			.failureUrl("/login?error=true")
 	     			.defaultSuccessUrl("/default") //home
+	     			.failureUrl("/login?error=true")
 	     .and()
 	     	.logout()
 	     			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -50,13 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      	.and()
 	     	.exceptionHandling()
 	     	.accessDeniedPage("/AccessDenied");
-}
+	}
 	
 	 @Override
-	 public void configure(WebSecurity webSecurity) throws Exception {
-		 
+	 public void configure(WebSecurity webSecurity) throws Exception{		 
 		 webSecurity.ignoring()
-		 			.antMatchers("/resources/**","/static/**","/css/**","/js/**","/images/**","/img/**","/fonts/**","/font-awesome-4.40/**");
-		 
+			.antMatchers("/resources/**","/static/**","/css/**","/js/**","/images/**","/img/**","/fonts/**");
 	 }
 }

@@ -29,7 +29,7 @@
 
     <form th:action="@{/login}" th:method="POST" class="login-form">
       <div class="login-wrap">
-      <span th:utext="${successMessage}"></span>
+      <span th:text="${successMessage}"></span>
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
           <span class="input-group-addon login_icon_span"><i class="icon_profile login_icons"></i></span>

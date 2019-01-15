@@ -27,14 +27,14 @@ public class HomeControllerTest {
   private MockMvc mockMvc;   
   @Test
   public void testHomePage() throws Exception {
-    mockMvc.perform(get("/"))   
+    mockMvc.perform(get("/home"))   
     
       .andExpect(status().isOk()) 
       
-      .andExpect(view().name("login"))  
+      .andExpect(view().name("userHomePage"))  
       
       .andExpect(content().string(       
-          containsString("User")));  
+          containsString("Artist")));  
   }
 
 }

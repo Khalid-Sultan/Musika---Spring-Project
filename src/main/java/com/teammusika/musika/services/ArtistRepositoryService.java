@@ -12,11 +12,9 @@ import java.util.List;
 @Service
 public class ArtistRepositoryService {
 
-    private ArtistRepository artistRepository;
     @Autowired
-    public ArtistRepositoryService(ArtistRepository artistRepository) {
-    	this.artistRepository = artistRepository;
-    }
+    private ArtistRepository artistRepository;
+
     public Artist storeFile(String fullName, byte[] artistPhoto, String email) {
         Artist artist = new Artist(fullName,artistPhoto,email);
         return artistRepository.save(artist);

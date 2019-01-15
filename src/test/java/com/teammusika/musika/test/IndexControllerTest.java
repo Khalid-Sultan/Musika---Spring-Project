@@ -16,23 +16,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(com.teammusika.musika.controllers.ViewSongsController.class)  
+@WebMvcTest(com.teammusika.musika.controllers.IndexController.class)  
 @EnableJpaRepositories("com.teammusika.musika.repositories")
 @ComponentScan("com.teammusika.musika")
-public class ViewSongsControllerTest {
+public class IndexControllerTest {
 
   @Autowired
   private MockMvc mockMvc;   
   @Test
-  public void testViewSongsPage() throws Exception {
-    mockMvc.perform(get("/home"))   
+  public void testIndexPage() throws Exception {
+    mockMvc.perform(get("/"))   
     
       .andExpect(status().isOk()) 
       
-      .andExpect(view().name("index"))  
+      .andExpect(view().name("index"));
       
-      .andExpect(content().string(       
-          containsString("Song")));  
   }
 
 }

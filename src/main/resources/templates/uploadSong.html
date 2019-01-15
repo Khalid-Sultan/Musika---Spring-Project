@@ -115,8 +115,7 @@
            <div class="main">
     
     <div class="container">
-    <form method="POST" enctype="multipart/form-data" th:object="${artistArray}">
-
+	<form th:method="POST"  th:action="@{/admin/uploadSongs}" enctype="multipart/form-data" th:object="${artistArray}">
         <h3>Deliver my song masterpieces to...</h3>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Song Name: </label>
