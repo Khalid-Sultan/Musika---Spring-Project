@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +22,12 @@ import com.teammusika.musika.domains.Playlist;
 import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.repositories.PlaylistRepository;
 import com.teammusika.musika.repositories.SongRepository;
+import com.teammusika.musika.security.User;
 import com.teammusika.musika.services.SongRepositoryService;
+import com.teammusika.musika.services.UserService;
 
 @Controller
-@RequestMapping("playlist")
+
 public class PlaylistController {
 	 class Objected{
 	        public Long songId;
@@ -45,9 +49,18 @@ public class PlaylistController {
 
 	 @Autowired
 	 private PlaylistRepository playlistRepository;
+		private UserService userService;
+		
+		@Autowired
+		public PlaylistController(UserService userService) {
+			this.userService = userService;
+		}
 
-		@GetMapping
-		public String getMapping(Model model) {
+		@GetMapping("/playlist")
+		public String getMapping(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
+			String username = userDetails.getUsername();
+			user = userService.findUserByUsername(username);
+			model.addAttribute("user", user);
 			return "playlist";
 		}
 	 @ModelAttribute

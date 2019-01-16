@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,7 +21,9 @@ import com.teammusika.musika.domains.Playlist;
 import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.repositories.PlaylistRepository;
 import com.teammusika.musika.repositories.SongRepository;
+import com.teammusika.musika.security.User;
 import com.teammusika.musika.services.SongRepositoryService;
+import com.teammusika.musika.services.UserService;
 
 @Controller
 @RequestMapping("addPlaylist")
@@ -45,11 +49,13 @@ public class AddPlaylistController {
    // private IngredientRepository ingredientRepository;
 	private SongRepository songRepository;
 	private PlaylistRepository playListRepository;
+	private UserService userService;
 	
 	@Autowired
-	public  AddPlaylistController(SongRepository songRepository,PlaylistRepository playlistRepository) 
+	public  AddPlaylistController(UserService userService,SongRepository songRepository,PlaylistRepository playlistRepository) 
 	{
 		this.songRepository=songRepository;
+		this.userService=userService;
 		this.playListRepository=playlistRepository;
 	}
 
@@ -57,7 +63,10 @@ public class AddPlaylistController {
 	private SongRepositoryService songRepositoryService;
     
 	@ModelAttribute(name="playlistDesign")
-	public Playlist playlistDesign(Model model) {
+	public Playlist playlistDesign(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
+		String username = userDetails.getUsername();
+		user = userService.findUserByUsername(username);
+		model.addAttribute("user", user);
 		return new Playlist();
 	}
 
@@ -75,7 +84,11 @@ public class AddPlaylistController {
             System.out.println(song.getSongTitle());
         }
         model.addAttribute("songModel",objecteds);
-    }
+    }	
+	
+	
+
+	
 	@GetMapping
 	public String getmapp(Model model) {
 		return "addPlaylist";

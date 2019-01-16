@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a th:href="@{/home}">
                         <i class="fas fa-home"></i>
                         <span class="icon_music" id="gliph"></span>
                         <span class="icon_music min" id="gliph"></span>
@@ -86,7 +86,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <span class="icon_profile right-icons">
                 </span>
-                <span class="username">Jenifer Smith</span>
+                <span th:text="${user.firstName}" class="username">Jenifer Smith</span>
             </a>
             <ul class="dropdown-menu extended logout">
               <li class="eborder-top">
