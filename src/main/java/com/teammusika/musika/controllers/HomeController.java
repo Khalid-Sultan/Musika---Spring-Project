@@ -76,9 +76,7 @@ public class HomeController {
 	  public String index(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
 			String username = userDetails.getUsername();
 			user = userService.findUserByUsername(username);
-			//User user = userService.findUserByUsername(userDetails.getUsername());
 			model.addAttribute("user", user);
-			System.out.println(user.getFirstName());
 			return "userHomePage";
 	  }
 

@@ -15,7 +15,7 @@ public class DefaultController {
 			return "redirect:/admin";
 		}
 		else {
-			return "redirect:/index";
+			return "redirect:/home";
 		}
 	}
 }

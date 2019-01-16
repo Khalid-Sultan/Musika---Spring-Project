@@ -17,46 +17,12 @@ import com.teammusika.musika.services.UserService;
 @Controller
 public class LoginController {
 	
-	@Autowired
-	private UserService userService;
-	
-	@ModelAttribute(name="user")
-	public User user() {
-		return new User();
-	}
-	
-	
+
 
   @GetMapping("/login")
   public String login() {
 	  return "login";    
   }
   
-  @GetMapping("/registration")
-  public String registration() {
-	  return "registration";
-  }
-  
-
-  
-  @PostMapping("/registration")
-  public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
-      User userExists = userService.findUserByUsername(user.getUsername());
-      if (userExists != null) {
-          bindingResult
-                  .rejectValue("user", "error.user",
-                          "There is already a user registered with the username provided");
-      }
-      if (bindingResult.hasErrors()) {
-          return "registration";
-      } else {
-      	
-          userService.saveUser(user);
-          
-          model.addAttribute("successMessage", "User has been registered successfully");
-          
-          return "login"; // to return to login
-      }
-  }
-
+ 
 }

@@ -88,7 +88,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="icon_profile right-icons">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span  th:text="${user.firstName}" class="username">Jenifer Smith</span>
                             
                         </a>
             <ul class="dropdown-menu extended logout">
@@ -98,7 +98,7 @@
               </li>
          
               <li>
-                <a href="login.html" class="icon-dropdown"><i class="icon_key_alt"></i> Log Out</a>
+                <a th:href="@{/logout}" class="icon-dropdown"><i class="icon_key_alt"></i> Log Out</a>
               </li>
              
             </ul>
