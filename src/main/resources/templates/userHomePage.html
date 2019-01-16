@@ -112,7 +112,7 @@
 	                </li>                           
 	            </ul>
             </nav>
-            <nav class="navbar navbar-inverse navbar-fixed-bottom" style=" width: 100%; height: 5%; margin: 0%; padding: 0%;background-color: #000;">
+            <nav class="navbar navbar-inverse navbar-fixed-bottom" style=" width: 100%; height: 5%; margin: 0%; padding: 0%;background-color: #f1f3f4;">
 	       			<div class="col-md-4" style="width: 100%;height: 100%;">
 	       				<div class="col-md-4" style="width: 100%;height: 100%;">
 		       				<img id="playerImage" style="width: 100%;height: 100%;"/>
@@ -140,7 +140,8 @@
     	              			<span class="float-left title" th:text="${song.songTitle}">Song Name</span>
         	          			<span class="float-right">
     	        	    			<i class="icon_heart music-icon-heart btn"></i>
-    	        	    			<i class="icon_like music-icon-like btn" style="content:'\e046;'" th:onclick="@{ ' playSong(\' '+${song.songCover}+' \' , \' '+${song.songTitle}+' \' , \' '+${song.songFile}+' \' )'}">
+    	        	    			
+    	        	    			<i class="icon_music music-icon-like btn" style="content:'\e046;'" th:onclick="@{ ' playSong(\' '+${song.songCover}+' \' , \' '+${song.songTitle}+' \' , \' '+${song.songFile}+' \' )'}">
 									</i>
                   				</span>
                 			</span>

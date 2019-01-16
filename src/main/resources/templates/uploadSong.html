@@ -71,6 +71,16 @@
                         
                     </a>
                 </li>
+                 <li>
+                    <a href="../admin/addArtist">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="icon_contacts"></span>
+                        <span class="icon_contacts min"></span>
+                        
+                        <span class="list">Add Artist</span>
+                        
+                    </a>
+                </li>
 
         </nav><!--side bar ends here --!>
 
@@ -116,11 +126,8 @@
     
     <div class="container">
 	<form th:method="POST"  th:action="@{/admin/uploadSongs}" enctype="multipart/form-data" th:object="${artistArray}">
-        <h3>Deliver my song masterpieces to...</h3>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Song Name: </label>
-            <input type="text" id="singleFileTitleInput" name="songTitle"/>
-        </div>
+        <h3>Upload Song</h3>
+       
         <div class="form-group row">
             <label for="singleFileArtistInput" class="col-sm-2 col-form-label">Artist Name: </label>
             <input type="text" id="singleFileArtistInput" name="songArtist"/>
@@ -137,7 +144,7 @@
             <label class="col-sm-2 col-form-label">Cover Photo: </label>
             <input type="file" id="singleFileCoverInput" name="coverFile"/>
         </div>
-        <input type="submit" value="Submit order"/>
+        <input type="submit" class="btn btn-primary" value="Submit order"/>
     </form>
       
   </div>       
