@@ -1,0 +1,25 @@
+<div class="top-nav notification-row">
+        <ul class="nav pull-right top-menu">
+          <li id="alert_notificatoin_bar" class="dropdown">
+            <a data-toggle="dropdown" href="#">
+	            <i class="icon_mail right-icons"></i>
+	            <span class="badge bg-important">7</span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	            <span class="icon_profile right-icons">
+	            </span>
+		            <span th:text="${user.firstName}" class="username">Jenifer Smith</span>
+  	        </a>
+	        <ul class="dropdown-menu extended logout">
+              <li class="eborder-top">
+                <a href="#" class="icon-dropdown"><i class="icon_profile"></i> My Profile</a>
+              </li>
+              <li>
+                <a th:href="@{/logout}" class="icon-dropdown"><i class="icon_key_alt"></i> Log Out</a>
+              </li>
+            </ul>
+          </li>
+         </ul>
+</div>

@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.teammusika.musika.domains.Artist;
 import com.teammusika.musika.domains.Song;
+import com.teammusika.musika.security.User;
 import com.teammusika.musika.services.ArtistRepositoryService;
 import com.teammusika.musika.services.SongRepositoryService;
+import com.teammusika.musika.services.UserService;
 
 @Controller
 public class UploadController {
@@ -28,10 +32,16 @@ public class UploadController {
 	private SongRepositoryService songRepositoryService;
 	@Autowired
 	private ArtistRepositoryService artistRepositoryService;
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/admin/uploadSong")
-	public String uploadForm() {
-		return "uploadSong";
+	public String uploadForm(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
+		
+		String username = userDetails.getUsername();
+		user = userService.findUserByUsername(username);
+		model.addAttribute("user", user);
+		return "admin/uploadSong";
 	}
 
 	@ModelAttribute
@@ -59,7 +69,7 @@ public class UploadController {
             }
 			Song savedSong = songRepositoryService.storeFile(songFileBytes,artistNames,albumName,songTitle,songCoverBytes);
 			if(savedSong==null) return "redirect:/ErrorInvalidArtist";
-			return "redirect:/admin";
+			return "redirect:/admin/admin";
 		}
 		catch(IOException ex) {
 			return "redirect:/ErrorUploadSong";

@@ -12,10 +12,10 @@ public class DefaultController {
 	@RequestMapping("/default")
 	public String DefaultAfterLogin(@AuthenticationPrincipal UserDetails userDetails) {
 		if(userDetails.getAuthorities().toString().equals("[MUSIKAADMIN]")) {
-			return "redirect:/admin";
+			return "redirect:/admin/admin";
 		}
 		else {
-			return "redirect:/home";
+			return "redirect:/user/home";
 		}
 	}
 }

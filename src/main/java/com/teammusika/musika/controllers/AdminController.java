@@ -13,7 +13,7 @@ import com.teammusika.musika.security.User;
 import com.teammusika.musika.services.UserService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/admin")
 public class AdminController {
 private UserService userService;
 	
@@ -29,6 +29,6 @@ private UserService userService;
 		user = userService.findUserByUsername(username);
 		model.addAttribute("user", user);
 		
-		return "admin";
+		return "admin/admin";
 	}
 }

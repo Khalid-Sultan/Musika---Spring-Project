@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.teammusika.musika.domains.SongObject;
 import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.security.User;
 import com.teammusika.musika.services.SongRepositoryService;
@@ -28,29 +29,13 @@ import com.teammusika.musika.services.UserService;
 
 @Controller
 public class HomeController {
-    class Objected{
-        public Long songId;
-        public String songTitle;
-        public String songAlbumName;
-        public int songLikes;
-        public String songFile;
-        public String songCover;
-        public Objected(String file,String photo,Song song){
-            this.songFile = file;
-            this.songCover = photo;
-            this.songId = song.getSongId();
-            this.songTitle = song.getSongTitle();
-            this.songAlbumName = song.getAlbumTitle();
-            this.songLikes = song.getSongLikes();
-        }
-    }
-
+ 
     @Autowired
     private SongRepositoryService songRepositoryService;
 
     @ModelAttribute
     public void addSongsToModel(Model model) {
-        List<Objected> objecteds = new ArrayList<>();
+        List<SongObject> objecteds = new ArrayList<>();
         List<Song> songsList = songRepositoryService.findAll();
         System.out.println("11111111111111111");
         for (Song song: songsList) {
@@ -58,7 +43,7 @@ public class HomeController {
             String file_string = org.springframework.util.Base64Utils.encodeToString(file);
             byte[] image = song.getSongCover();
             String image_string = org.springframework.util.Base64Utils.encodeToString(image);
-            objecteds.add(new Objected(file_string,image_string,song));
+            objecteds.add(new SongObject(file_string,image_string,song));
             System.out.println(song.getSongTitle());
         }
         model.addAttribute("songModel",objecteds);
@@ -72,17 +57,18 @@ public class HomeController {
 	}
 	
 	  
-	  @GetMapping("/home")
+	  @GetMapping("/user/home")
 	  public String index(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
 			String username = userDetails.getUsername();
 			user = userService.findUserByUsername(username);
 			model.addAttribute("user", user);
-			return "userHomePage";
+			return "/user/home";
 	  }
 
-	    @RequestMapping(value = "/home/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	    public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response){
+	   @RequestMapping(value = "user/home/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	   public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response){
 	    	try {
+	    		
 	            byte[] audio = org.springframework.util.Base64Utils.decodeFromString(file);
 	            InputStream inputStream = new ByteArrayInputStream(audio);
 	            IOUtils.copy(inputStream,response.getOutputStream());

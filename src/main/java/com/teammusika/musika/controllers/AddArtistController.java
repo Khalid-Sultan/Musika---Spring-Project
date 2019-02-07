@@ -28,7 +28,7 @@ public class AddArtistController {
 
     @GetMapping("/admin/addArtist")
     public String addArtist() {
-        return "addArtist";
+        return "admin/addArtist";
     }
 
     @RequestMapping(value = "/admin/addArtist", method=RequestMethod.POST)
@@ -39,7 +39,7 @@ public class AddArtistController {
         try {
             byte[] artistPhotoBytes = artistPhoto.getBytes();
             artistRepositoryService.storeFile(artistFullName,artistPhotoBytes,artistEmail);
-			return "redirect:/admin";
+			return "redirect:/admin/admin";
         }
         catch(Exception ex) {
             return "redirect:/ErrorAddArtist";

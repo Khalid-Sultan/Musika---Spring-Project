@@ -7,23 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.teammusika.musika.domains.Artist;
+import com.teammusika.musika.domains.ArtistObject;
 import com.teammusika.musika.services.ArtistRepositoryService;
 
 import java.util.*;
 @Controller
 public class ViewArtistsController {
-    class Objected{
-        public String photo;
-        public Long artistId;
-        public String artistFullName;
-        public String artistEmail;
-        public Objected(String photo,Artist artist){
-            this.photo = photo;
-            this.artistId = artist.getArtistId();
-            this.artistFullName = artist.getArtistFullName();
-            this.artistEmail = artist.getArtistEmail();
-        }
-    }
+
 
     @Autowired
     private ArtistRepositoryService artistRepositoryService;
@@ -35,13 +25,13 @@ public class ViewArtistsController {
 
         List<Artist> artistList = artistRepositoryService.findAll();
 
-        List<Objected> objecteds = new ArrayList<>();
+        List<ArtistObject> objecteds = new ArrayList<>();
         for (Artist artist: artistList) {
             byte[] image = artist.getArtistPhoto();
             String photo = org.springframework.util.Base64Utils.encodeToString(image);
             artists.add(artist);
             photos.add(photo);
-            objecteds.add(new Objected(photo,artist));
+            objecteds.add(new ArtistObject(photo,artist));
         }
         model.addAttribute("allObjects",objecteds);
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.teammusika.musika.domains.SongObject;
 import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.services.SongRepositoryService;
 
@@ -20,29 +21,14 @@ import java.util.List;
 
 @Controller
 public class ViewSongsAdminController {
-    class Objected{
-        public Long songId;
-        public String songTitle;
-        public String songAlbumName;
-        public int songLikes;
-        public String songFile;
-        public String songCover;
-        public Objected(String file,String photo,Song song){
-            this.songFile = file;
-            this.songCover = photo;
-            this.songId = song.getSongId();
-            this.songTitle = song.getSongTitle();
-            this.songAlbumName = song.getAlbumTitle();
-            this.songLikes = song.getSongLikes();
-        }
-    }
+  
 
     @Autowired
     private SongRepositoryService songRepositoryService;
 
     @ModelAttribute
     public void addSongsToModel(Model model) {
-        List<Objected> objecteds = new ArrayList<>();
+        List<SongObject> objecteds = new ArrayList<>();
         List<Song> songsList = songRepositoryService.findAll();
         System.out.println("11111111111111111");
         for (Song song: songsList) {
@@ -50,7 +36,7 @@ public class ViewSongsAdminController {
             String file_string = org.springframework.util.Base64Utils.encodeToString(file);
             byte[] image = song.getSongCover();
             String image_string = org.springframework.util.Base64Utils.encodeToString(image);
-            objecteds.add(new Objected(file_string,image_string,song));
+            objecteds.add(new SongObject(file_string,image_string,song));
             System.out.println(song.getSongTitle());
         }
         model.addAttribute("songModel",objecteds);

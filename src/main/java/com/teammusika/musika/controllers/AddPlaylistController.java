@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import com.teammusika.musika.domains.SongObject;
 import com.teammusika.musika.domains.Playlist;
 import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.repositories.PlaylistRepository;
@@ -26,26 +28,10 @@ import com.teammusika.musika.services.SongRepositoryService;
 import com.teammusika.musika.services.UserService;
 
 @Controller
-@RequestMapping("addPlaylist")
+@RequestMapping("user/addPlaylist")
 public class AddPlaylistController {
 	
 	
-    class Objected{
-        public Long songId;
-        public String songTitle;
-        public String songAlbumName;
-        public int songLikes;
-        public String songFile;
-        public String songCover;
-        public Objected(String file,String photo,Song song){
-            this.songFile = file;
-            this.songCover = photo;
-            this.songId = song.getSongId();
-            this.songTitle = song.getSongTitle();
-            this.songAlbumName = song.getAlbumTitle();
-            this.songLikes = song.getSongLikes();
-        }
-    }
    // private IngredientRepository ingredientRepository;
 	private SongRepository songRepository;
 	private PlaylistRepository playListRepository;
@@ -72,7 +58,7 @@ public class AddPlaylistController {
 
 	@ModelAttribute
     public void addSongsToModel(Model model) {
-        List<Objected> objecteds = new ArrayList<>();
+        List<SongObject> objecteds = new ArrayList<>();
         List<Song> songsList = songRepositoryService.findAll();
         System.out.println("11111111111111111");
         for (Song song: songsList) {
@@ -80,7 +66,7 @@ public class AddPlaylistController {
             String file_string = org.springframework.util.Base64Utils.encodeToString(file);
             byte[] image = song.getSongCover();
             String image_string = org.springframework.util.Base64Utils.encodeToString(image);
-            objecteds.add(new Objected(file_string,image_string,song));
+            objecteds.add(new SongObject(file_string,image_string,song));
             System.out.println(song.getSongTitle());
         }
         model.addAttribute("songModel",objecteds);
@@ -91,7 +77,7 @@ public class AddPlaylistController {
 	
 	@GetMapping
 	public String getmapp(Model model) {
-		return "addPlaylist";
+		return "user/addPlaylist";
 	}
 	@RequestMapping(value = "/addPlaylist/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response){
@@ -116,7 +102,7 @@ public class AddPlaylistController {
 		System.out.println("out");
 		Playlist savedTaco=playListRepository.save(myPlaylist);
 		
-		return "redirect:/index";
+		return "redirect:/user/playlist";
 		
 	}
 }
