@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Musika
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
