@@ -3,64 +3,68 @@
 	xmlns:th="http://www.thymeleaf.org">
 <title>Musika Sign up</title>
 
- <!-- Bootstrap CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- bootstrap theme -->
-  <link href="css/bootstrap-theme.css" rel="stylesheet">
-  <!--external css-->
-  <!-- font icon -->
-  <link href="css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="css/font-awesome.css" rel="stylesheet" />
-  <!-- Custom styles -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet" />
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- bootstrap theme -->
+<link href="css/bootstrap-theme.css" rel="stylesheet">
+<!--external css-->
+<!-- font icon -->
+<link href="css/elegant-icons-style.css" rel="stylesheet" />
+<link href="css/font-awesome.css" rel="stylesheet" />
+<!-- Custom styles -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-responsive.css" rel="stylesheet" />
 
 </head>
 
 <body class="login-img3-body">
 	<div class="container">
-		<form th:action="@{/registration}" th:object="${user}" th:method="POST" class="login-form" role="form">
-		<div class="login-wrap">
-		<span th:utext="${successMessage}"></span>
-		<p class="signup_header">Sign up here</p>
-		<p class="login-img"><i class="icon_document_alt"></i></p>
+		<form th:action="@{/registration}" th:object="${user}"
+			th:method="POST" class="login-form" role="form">
+			<div class="login-wrap">
+				<span th:utext="${successMessage}"></span>
+				<p class="signup_header">Sign up here</p>
+				<p class="login-img">
+					<i class="icon_document_alt"></i>
+				</p>
 
-		<div class="input-group">
-				<label class="reg_label" for="firstName">First Name </label> <input type="text" 
-					th:field="*{firstName}"  class="form-control" /> <span
-					class="text-danger" th:if="${#fields.hasErrors('firstName')}"
-					th:errors="*{firstName}">First Name Error </span>
-		</div>
+				<div class="input-group">
+					<label class="reg_label" for="firstName">First Name </label> <input
+						type="text" th:field="*{firstName}" class="form-control" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+						th:errors="*{firstName}">First Name Error </span>
+				</div>
 
-		<div class="input-group">
-				<label class="reg_label" for="lastName">Last Name </label> <input type="text"
-					th:field="*{lastName}" class="form-control" /> <span
-					class="text-danger" th:if="${#fields.hasErrors('lastName')}"
-					th:errors="*{lastName}">Last Name Error</span>
-			</div>
-			<div class="input-group">
-				<label class="reg_label" for="userName">User Name </label> <input type="text"
-					th:field="*{username}" class="form-control" /> <span
-					class="text-danger" th:if="${#fields.hasErrors('username')}"
-					th:errors="*{username}">Username Error</span>
-			</div>
-			<div class="input-password">
-				<label  class="reg_label" for="password">Password</label> <input type="password"
-					th:field="*{password}" class="form-control" /> <span
-					class="text-danger" th:if="${#fields.hasErrors('password')}"
-					th:errors="*{password}">Password Error</span>
+				<div class="input-group">
+					<label class="reg_label" for="lastName">Last Name </label> <input
+						type="text" th:field="*{lastName}" class="form-control" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+						th:errors="*{lastName}">Last Name Error</span>
+				</div>
+				<div class="input-group">
+					<label class="reg_label" for="userName">User Name </label> <input
+						type="text" th:field="*{username}" class="form-control" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('username')}"
+						th:errors="*{username}">Username Error</span>
+				</div>
+				<div class="input-password">
+					<label class="reg_label" for="password">Password</label> <input
+						type="password" th:field="*{password}" class="form-control" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('password')}"
+						th:errors="*{password}">Password Error</span>
 
-			</div>
+				</div>
 
 
 
-		 <button class="btn btn-primary btn-block" name="submit" value="Register" type="submit" th:text="Register"></button>
+				<button class="btn btn-primary btn-block" name="submit"
+					value="Register" type="submit" th:text="Register"></button>
 		</form>
 		<form th:action="@{/login}" th:method="GET">
 			<button class="btn btn-md btn-warning btn-block" type="Submit">Login</button>
 		</form>
-	
-	
+
+
 		&copy; 2018 Musika
 	</div>
 

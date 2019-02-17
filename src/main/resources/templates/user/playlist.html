@@ -1,92 +1,85 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Musika Ui</title>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
-    <link rel="stylesheet" type="text/css" href="../css/css/bootstrap.min.css">
-    <link href="../css/elegant-icons-style.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" href="../css/style.css"/> 
-    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Musika Ui</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/css/bootstrap.min.css">
+<link href="../css/elegant-icons-style.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+<link rel="stylesheet" href="../css/style.css" />
+
 </head>
 
 <body>
-    <div class="wrapper">
-       
-       <nav id="sidebar" th:insert="fragments/userAside.html">
-           
-        </nav>
-        <div id="content">
-            <div th:insert="fragments/userheader.html">
-          </div>
-  
-             <h2 class="page">Playlist</h2>
-            <a href="addPlaylist"><div><span><i class="icon_plus music-icon-like btn"></i> Add New Playlist</span></div></a> 
-           
-            <div class="main">
-                
-                <table class="table table-striped">
-                    <thead>
-                    
-                    <td>Title</td>
-                    <td>Album Name</td>
-                    
-                    <td>File</td>
-                    
-                    </thead>
-                    <tbody>
-                    <tr><h4 th:text="${playlistname}">PlaylistName</h4></tr>
-                    <tr th:each="obj : ${songModel}">
-                        <td> <span th:text="${obj.songTitle}">SONG</span> </td>
-                        <td> <span th:text="${obj.songAlbumName}">SONG</span> </td>
-                        <td>
-                            <form method="get" action="/admin/viewSongs/{obj}">
-                                <audio controls>
-                                    <source th:src="@{'data:audio/mp3;base64,'+${obj.songFile}}" type="audio/mp3"/>
-                                </audio>
-                            </form>
-                        </td>
-                    
-                    </tr>
-                    </tbody>
-                  </table>
-            
-                
-                            </div>  
+	<div class="wrapper">
 
-                            
-                        </div>
-    </div>
+		<nav id="sidebar" th:insert="/fragments/userAside.html"></nav>
+		<div id="content">
+			<div th:insert="/fragments/userheader.html"></div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+			<h2 class="page">Playlists</h2>
+			<div class="main">
+				<h4>
+					<a href="addPlaylist">
+						<span style="color:red">Add New Playlist</span>
+					</a>
+				</h4>
+				<div th:each="playlist:${playlists}">
+					<h3 th:text="${playlist.name}"></h3>
+					<div class="row">
+						<div th:each="song:${playlist.songs}" class = "col-xl-3 col-sm-6 mb-3">
+							<div class="card text-white o-hidden h-100">
+								<div class="card-body">
+									<img th:src="@{'data:image/jpeg;base64,'+${song.songCover}}">
+								</div>
+								<span class="card-footer text-white clearfix small z-1" href="#">
+									<span class="float-left title" th:text="${song.songTitle}">Song Name</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<hr/>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-        /*<![CDATA[*/
-        function playSong(fileBytes){
-            var playModel = document.getElementById("playModel");
-            playModel.action = "/home/{fileBytes}";
-            playModel.method = "get";
-            var player = document.getElementById("player");
-            player.src = "data:audio/mp3;base64,"+fileBytes;
-            player.play();
-        }
-        /*]]>*/
-        
-    </script>
+	<script src="js/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="js/popper.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar').toggleClass('active');
+			});
+		});
+		/*<![CDATA[*/
+		function playSong(fileBytes) {
+			var playModel = document.getElementById("playModel");
+			playModel.action = "/home/{fileBytes}";
+			playModel.method = "get";
+			var player = document.getElementById("player");
+			player.src = "data:audio/mp3;base64," + fileBytes;
+			player.play();
+		}
+		/*]]>*/
+	</script>
 </body>
 </html>

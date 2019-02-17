@@ -27,8 +27,7 @@ private UserService userService;
 	public String getMapping(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
 		String username = userDetails.getUsername();
 		user = userService.findUserByUsername(username);
-		model.addAttribute("user", user);
-		
+		model.addAttribute("user", user);		
 		return "admin/admin";
 	}
 }

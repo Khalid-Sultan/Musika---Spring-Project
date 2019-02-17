@@ -1,96 +1,102 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Musika Ui</title>
+<title>Musika Ui</title>
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-    <link rel="stylesheet" th:href="@{/css/bootstrap.theme.css}" />
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.theme.css}" />
 
-    <link rel="stylesheet" th:href="@{/css/elegant-icons-style.css}" />
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
- 
- 
-    <!-- Our Custom CSS -->
-       <link rel="stylesheet" th:href="@{/css/style.css}" />
-    
+<link rel="stylesheet" th:href="@{/css/elegant-icons-style.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 
- 
+
+<!-- Our Custom CSS -->
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+
+
 
 </head>
 
 <body>
 
-    <div class="wrapper">
+	<div class="wrapper">
 
-       <!-- Sidebar  -->
-        <nav id="sidebar" th:insert="fragments/adminAside.html">
-        
-        
-        </nav><!--side bar ends here --!>
+		<!-- Sidebar  -->
+		<nav id="sidebar" th:insert="/fragments/adminAside.html"></nav>
+		<!--side bar ends here --!>
 
         <!-- Page Content  -->
-        <div id="content">
-            <div th:insert="fragments/adminHeader.html">
-                
-     		</div>
+		<div id="content">
+			<div th:insert="/fragments/adminHeader.html"></div>
 
 
-           <div class="main">
-    
-    <div class="container">
-	<form th:method="POST"  th:action="@{/admin/uploadSongs}" enctype="multipart/form-data" th:object="${artistArray}">
-        <h3>Upload Song</h3>
-       
-        <div class="form-group row">
-            <label for="singleFileArtistInput" class="col-sm-2 col-form-label">Artist Name: </label>
-            <input type="text" id="singleFileArtistInput" name="songArtist"/>
-        </div>
-        <div class="form-group row">
-            <label for="singleFileAlbumInput" class="col-sm-2 col-form-label">Album Name: </label>
-            <input type="text" id="singleFileAlbumInput" name="songAlbum"/>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Song File: </label>
-            <input type="file" id="singleFileUploadInput" name="songFile" />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Cover Photo: </label>
-            <input type="file" id="singleFileCoverInput" name="coverFile"/>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Submit order"/>
-    </form>
-      
-  </div>       
+			<div class="main">
 
-        </div>
+				<div class="container">
+					<form th:method="POST" th:action="@{/admin/uploadSongs}"
+						enctype="multipart/form-data" th:object="${artistArray}">
+						<h3>Upload Song</h3>
 
-        </div>
-    </div>
+						<div class="form-group row">
+							<label for="singleFileArtistInput"
+								class="col-sm-2 col-form-label">Artist Name: </label> <input
+								type="text" id="singleFileArtistInput" name="songArtist" />
+						</div>
+						<div class="form-group row">
+							<label for="singleFileAlbumInput" class="col-sm-2 col-form-label">Album
+								Name: </label> <input type="text" id="singleFileAlbumInput"
+								name="songAlbum" />
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Song File: </label> <input
+								type="file" id="singleFileUploadInput" name="songFile" />
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Cover Photo: </label> <input
+								type="file" id="singleFileCoverInput" name="coverFile" />
+						</div>
+						<input type="submit" class="btn btn-primary" value="Submit order" />
+					</form>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
 
 
-       <!-- jQuery CDN - Slim version (=without AJAX) -->
-       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-       <!-- custome js to toggle sidebar -->
+	<!-- jQuery CDN - Slim version (=without AJAX) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<!-- Popper.JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+	<!-- Bootstrap JS -->
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+		crossorigin="anonymous"></script>
+	<!-- custome js to toggle sidebar -->
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar').toggleClass('active');
+			});
+		});
+	</script>
 </body>
 
 </html>

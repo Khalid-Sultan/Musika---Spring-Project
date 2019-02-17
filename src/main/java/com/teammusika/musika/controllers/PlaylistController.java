@@ -3,6 +3,8 @@ package com.teammusika.musika.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
@@ -30,55 +32,66 @@ import com.teammusika.musika.services.UserService;
 
 public class PlaylistController {
 
+	@Autowired
+	private PlaylistRepository playlistRepository;
+	private UserService userService;
+	private User currentUser;
 
-	 @Autowired
-	 private PlaylistRepository playlistRepository;
-		private UserService userService;
-		
-		@Autowired
-		public PlaylistController(UserService userService) {
-			this.userService = userService;
-		}
+	@Autowired
+	public PlaylistController(UserService userService) {
+		this.userService = userService;
+	}
 
-		@GetMapping("/user/playlist")
-		public String getMapping(Model model, User user,@AuthenticationPrincipal UserDetails userDetails) {
-			String username = userDetails.getUsername();
-			user = userService.findUserByUsername(username);
-			model.addAttribute("user", user);
-			return "/user/playlist";
+	@GetMapping("/user/playlist")
+	public String getMapping(Model model, User user, @AuthenticationPrincipal UserDetails userDetails) {
+		String username = userDetails.getUsername();
+		user = userService.findUserByUsername(username);
+		this.currentUser = user;
+		model.addAttribute("user", user);
+		return "/user/playlist";
+	}
+
+	public class A{
+		public String name;
+		public List<SongObject> songs;
+		public A(String s, List<SongObject> o) {
+			this.name = s; this.songs = o;
 		}
-	 @ModelAttribute
-	  public void addSongsToModel(Model model) {
-	        List<SongObject> objecteds = new ArrayList<>();
-	        List<Playlist> playlists=playlistRepository.findAll();
-	        for(Playlist playlist: playlists) {
-	        	model.addAttribute("playlistname",playlist.getPlaylist_name());
-	            Set<Song> songsList =  playlist.getSongs();
-		        System.out.println("11111111111111111");
-		        for (Song song: songsList) {
-		            byte[] file = song.getSongFile();
-		            String file_string = org.springframework.util.Base64Utils.encodeToString(file);
-		            byte[] image = song.getSongCover();
-		            String image_string = org.springframework.util.Base64Utils.encodeToString(image);
-		            objecteds.add(new SongObject(file_string,image_string,song));
-		            System.out.println(song.getSongTitle());
-		        }
-		        model.addAttribute("songModel",objecteds);
-	        	
-	        }
-	
-	    }
-	 @RequestMapping(value = "/user/playlist/{fileBytes}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	    public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response){
-	    	try {
-	            byte[] audio = org.springframework.util.Base64Utils.decodeFromString(file);
-	            InputStream inputStream = new ByteArrayInputStream(audio);
-	            IOUtils.copy(inputStream,response.getOutputStream());
-	            response.flushBuffer();    		
-	    	}
-	    	catch(Exception ex) {
-	    		System.out.println(ex.getMessage().toString());
-	    	}
-	    }
-	 
+	}
+	@ModelAttribute
+	public void addSongsToModel(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+		List<Playlist> playlists = playlistRepository.findAll();
+		List<A> a = new ArrayList<>();
+
+		for (Playlist playlist : playlists) {			
+			if(playlist.getUser().getUsername()!= userService.findUserByUsername(userDetails.getUsername()).getUsername()) {
+				continue;
+			}
+			List<SongObject> objecteds = new ArrayList<>();
+			Set<Song> songsList = playlist.getSongs();
+			for (Song song : songsList) {
+				byte[] file = song.getSongFile();
+				String file_string = org.springframework.util.Base64Utils.encodeToString(file);
+				byte[] image = song.getSongCover();
+				String image_string = org.springframework.util.Base64Utils.encodeToString(image);
+				objecteds.add(new SongObject(file_string, image_string, song));
+				System.out.println(song.getSongTitle());
+			}
+			a.add(new A(playlist.getPlaylist_name(),objecteds));
+		}
+		model.addAttribute("playlists",a);
+	}
+
+	@RequestMapping(value = "/user/playlist/{fileBytes}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public void getMedia(@PathVariable("fileBytes") String file, HttpServletResponse response) {
+		try {
+			byte[] audio = org.springframework.util.Base64Utils.decodeFromString(file);
+			InputStream inputStream = new ByteArrayInputStream(audio);
+			IOUtils.copy(inputStream, response.getOutputStream());
+			response.flushBuffer();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage().toString());
+		}
+	}
+
 }

@@ -2,6 +2,7 @@ package com.teammusika.musika.domains;
 
 import javax.persistence.*;
 
+import lombok.Builder.Default;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -15,7 +16,14 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long songId;
-	private int songLikes;
+
+	private int songLikes = 0;
+	public void addSongLikes() {
+		this.songLikes++;
+	}
+	public void subSongLikes() {
+		this.songLikes--;
+	}
 	private String songTitle;
 	private String albumTitle;
 	@Lob
