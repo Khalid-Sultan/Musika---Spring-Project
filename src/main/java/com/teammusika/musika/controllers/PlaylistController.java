@@ -64,6 +64,7 @@ public class PlaylistController {
 		List<A> a = new ArrayList<>();
 
 		for (Playlist playlist : playlists) {			
+			if(playlist==null) continue;
 			if(playlist.getUser().getUsername()!= userService.findUserByUsername(userDetails.getUsername()).getUsername()) {
 				continue;
 			}

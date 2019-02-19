@@ -1,7 +1,5 @@
 package com.teammusika.musika.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,8 +12,9 @@ public class DefaultController {
 		if(userDetails.getAuthorities().toString().equals("[MUSIKAADMIN]")) {
 			return "redirect:/admin/admin";
 		}
-		else {
+//		else if(userDetails.getAuthorities().toString().equals("[MUSIKAUSER]")) {
 			return "redirect:/user/home";
-		}
+//		}
+//		return "redirect:/";
 	}
 }

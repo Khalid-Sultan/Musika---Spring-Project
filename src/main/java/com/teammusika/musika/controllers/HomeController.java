@@ -77,7 +77,7 @@ public class HomeController {
 	}
  
  	@PostMapping("/user/home")
-	public String addPlaylist(@RequestParam("SongId") String id) {	 		
+	public String rateSong(@RequestParam("SongId") String id) {	 		
 		List<Song> songs = songRepositoryService.findAll();		
 		for(Song s : songs) {
 			System.out.println("\n--------\n"+s.getSongId()+"\n--------\n"+id+"\n--------\n");

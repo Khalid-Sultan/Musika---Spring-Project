@@ -22,6 +22,7 @@ public class Song {
 		this.songLikes++;
 	}
 	public void subSongLikes() {
+		if(songLikes>0)
 		this.songLikes--;
 	}
 	private String songTitle;

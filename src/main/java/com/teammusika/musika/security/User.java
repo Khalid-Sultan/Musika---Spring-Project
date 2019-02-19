@@ -36,9 +36,11 @@ public class User implements UserDetails {
 
 	@NotBlank(message = "Please provide a username")
 	private String username;
+
 	public Long getId() {
 		return id;
 	}
+
 	@Override
 	public String getUsername() {
 		return username;
@@ -65,9 +67,25 @@ public class User implements UserDetails {
 	@NotBlank(message = "Please provide your first name")
 	private String firstName;
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
 	@Column(name = "last_name")
 	@NotBlank(message = "Please provide your last name")
 	private String lastName;
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
 	@Column(name = "enabled")
 	private int enabled;
@@ -75,11 +93,12 @@ public class User implements UserDetails {
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "role_id") })
 	private Set<Role> roles;
+
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}

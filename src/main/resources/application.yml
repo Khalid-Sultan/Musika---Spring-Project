@@ -5,8 +5,22 @@ spring:
     admin:
       client:
         url: http://localhost:9090
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/musika_my
+#    username: musika_user
+#    password: P@$$w0rd
+#    initialization-mode: always
+#  jpa:
+#    hibernate.ddl-auto: none
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
 management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: '*' 
