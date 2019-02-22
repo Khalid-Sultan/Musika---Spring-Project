@@ -56,24 +56,23 @@ public class HomeController {
 	}
 
 	private UserService userService;
-
-	@Autowired
-	public HomeController(UserService userService) {
-		this.userService = userService;
-	}
-
-	@Autowired
 	private RatingRepositoryService ratingRepositoryService;
+
+	@Autowired
+	public HomeController(UserService userService, RatingRepositoryService ratingRepositoryService) {
+		this.userService = userService;
+		this.ratingRepositoryService = ratingRepositoryService;
+	}
 
 	private User currentUser;
 
-	@GetMapping("/user/home")
+	@RequestMapping(value="/user/home",method = RequestMethod.GET)
 	public String index(Model model, User user, @AuthenticationPrincipal UserDetails userDetails) {
 		String username = userDetails.getUsername();
 		user = userService.findUserByUsername(username);
 		this.currentUser = user;
 		model.addAttribute("user", user);
-		return "/user/home";
+		return "user/home";
 	}
  
  	@PostMapping("/user/home")

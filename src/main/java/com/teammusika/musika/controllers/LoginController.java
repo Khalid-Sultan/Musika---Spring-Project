@@ -10,19 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 import com.teammusika.musika.security.User;
 import com.teammusika.musika.services.UserService;
 
 @Controller
 public class LoginController {
-	
 
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 
-  @GetMapping("/login")
-  public String login() {
-	  return "login";    
-  }
-  
- 
 }
