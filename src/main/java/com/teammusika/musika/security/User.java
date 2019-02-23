@@ -37,6 +37,18 @@ public class User implements UserDetails {
 	@NotBlank(message = "Please provide a username")
 	private String username;
 
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

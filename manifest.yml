@@ -1,0 +1,6 @@
+applications:
+- name: musika
+  buildpack: java_buildpack
+  path: target/musika-0.0.1-SNAPSHOT.jar
+  services:
+    - musika_my

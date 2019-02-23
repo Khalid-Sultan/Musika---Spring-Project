@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DefaultController {
 	@RequestMapping("/default")
-	public String DefaultAfterLogin(@AuthenticationPrincipal UserDetails userDetails) {
+	public String routeLogin(@AuthenticationPrincipal UserDetails userDetails) {
 		if(userDetails.getAuthorities().toString().equals("[MUSIKAADMIN]")) {
 			return "redirect:/admin/admin";
 		}

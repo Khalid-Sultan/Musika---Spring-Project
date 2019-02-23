@@ -28,8 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().anyRequest().permitAll()  
-//        .and().csrf().disable();
 		 http.authorizeRequests()
 	     .antMatchers("/").permitAll()
 	     .antMatchers("/login").permitAll()
@@ -40,12 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     .anyRequest()
 //	     	.authenticated()
 	     	.permitAll()
-//	     http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/login").permitAll()
-//				.antMatchers("/registration").permitAll().antMatchers("/user", "/user/**").hasAuthority("MUSIKAUSER")
-//				.antMatchers("/admin", "/admin/**").hasAuthority("MUSIKAADMIN")
-//
-//				.anyRequest()
-//	     .permitAll()
 		.and()
 			.formLogin()
 				.loginPage("/login")
@@ -57,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/")
 		.and()
 			.exceptionHandling()
-				.accessDeniedPage("/AccessDenied") .and().csrf().disable();
+				.accessDeniedPage("/AccessDenied") 
+		.and().csrf().disable();
 	}
 
 	 @Override
