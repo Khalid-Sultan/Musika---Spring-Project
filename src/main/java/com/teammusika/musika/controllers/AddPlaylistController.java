@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.teammusika.musika.domains.SongObject;
 import com.teammusika.musika.domains.Playlist;
@@ -75,15 +76,17 @@ public class AddPlaylistController {
 		model.addAttribute("playlistDesign",playlistDesign);		
 	}
 	@PostMapping 
-	public String addPlaylist(@Valid @ModelAttribute("playlistDesign") Playlist myPlaylist, Errors errors) {		
+	public ModelAndView addPlaylist(@Valid @ModelAttribute("playlistDesign") Playlist myPlaylist, Errors errors) {		
 		if (errors.hasErrors()) {
 			System.out.println("in");
-			return "user/addPlaylist";
+			ModelAndView mov = new ModelAndView("user/addPlaylist");
+			return mov.addObject("user",this.currentUser);
 		}
 //		myPlaylist.setUser(this.currentUser);
 		System.out.println("out");
 		Playlist savedTaco = playListRepositoryService.save(myPlaylist);
-		return "redirect:/user/playlist";
+		ModelAndView mov = new ModelAndView("redirect:/user/playlist");
+		return mov;
 
 	}
 }
