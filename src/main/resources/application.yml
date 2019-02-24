@@ -1,27 +1,14 @@
 spring:
-  application:
-    name: Musika
-  boot:
-    admin:
-      client:
-        url: http://localhost:9090
+  profiles: docker
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/musika_my
-    url: jdbc:mysql://localhost/musika_my
+
+    url: jdbc:mysql://mysql:3306/musika_my?useJDBCCompliantTimezoneShift=true&serverTimezone=UTC
     username: musika_user
     password: P@$$w0rd
-    initialization-mode: never
+    
   jpa:
     hibernate.ddl-auto: none
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*' 
+    
