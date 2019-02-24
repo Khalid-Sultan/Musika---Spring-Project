@@ -53,25 +53,23 @@
 					</form>
 				</div>
 			</nav>
-			<div class="main">
-				<div th:each="song:${songModel}">
-					<form id="likeModel" th:action="@{/user/home}" th:method="post"  >
-						<div class="col-xl-3 col-sm-6 mb-3">
-							<div class="card text-white o-hidden h-100"> 
-								<div class="card-body">
-									<img th:src="@{'data:image/jpeg;base64,'+${song.songCover}}">
-								</div>
-								<span class="card-footer text-white clearfix small z-1">
-									<span class="float-left title" th:text="${song.songTitle}"> Song Name </span> 
-									<span class="float-right"> 
-										<input type="hidden" th:value="${song.songId}" th:name="SongId"/>
-										<span class="float-right title h5" th:text="${song.songLikes}"></span>
-										<button class="icon_heart music-icon-heart btn" type="submit">
-										</button> 
-										<i class="fas fa-fw fa-play music-icon-like btn" th:onclick="@{ ' playSong(\' '+${song.songCover}+' \' , \' '+${song.songTitle}+' \' , \' '+${song.songFile}+' \' )'}"> </i> 
-									</span>
-								</span>
+			<div class="row">
+				<div th:each="song:${songModel}" class="col-xl-3 col-sm-6 mb-3">
+					<form id="likeModel" th:action="@{/user/home}" th:method="post" >
+						<div class="card text-white o-hidden h-100"> 
+							<div class="card-body">
+								<img th:src="@{'data:image/jpeg;base64,'+${song.songCover}}">
 							</div>
+							<span class="card-footer text-white clearfix small z-1">
+								<span class="float-left title" th:text="${song.songTitle}"> Song Name </span> 
+								<span class="float-right"> 
+									<input type="hidden" th:value="${song.songId}" th:name="SongId"/>
+									<span class="float-right title h5" th:text="${song.songLikes}"></span>
+									<button class="icon_heart music-icon-heart btn" type="submit">
+									</button> 
+									<i class="fas fa-fw fa-play music-icon-like btn" th:onclick="@{ ' playSong(\' '+${song.songCover}+' \' , \' '+${song.songTitle}+' \' , \' '+${song.songFile}+' \' )'}"> </i> 
+								</span>
+							</span>
 						</div>
 					</form>
 				</div>

@@ -54,36 +54,7 @@ public class RatingRepositoryService {
 		rating.setUser(user);
 		rating.addSongs(song);
         ratingRepository.save(rating);
-    	return;
-//    		Set<Song> songs = rat.getSongs();
-//    		for (Song songItem : songs) {
-//    			if(song.getSongId()==songItem.getSongId()) {
-//    				if(rat.getUser().getId()==user.getId()) {
-//    			        ratingRepository.delete(rat);
-//    					song.subSongLikes();
-//    					songRepository.save(song);
-//    					return;
-//    				}
-//    				else {
-//    					song.addSongLikes();
-//    					songRepository.save(song);
-//    					Rating rating = new Rating();
-//    					rating.setUser(user);
-//    					rating.addSongs(song);
-//    			        ratingRepository.save(rating);
-////    					ratingRepository.save(rat);
-//    					return;
-//    				}
-//    			}
-//    		}
-//    	}
-//		song.addSongLikes();
-//		songRepository.save(song);
-//		Rating rating = new Rating();
-//		rating.setUser(user);
-//		rating.addSongs(song);
-//        ratingRepository.save(rating);
-//		return;
+    	return; 
     }
     public List<Rating> findAll(){
         return ratingRepository.findAll();

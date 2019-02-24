@@ -25,6 +25,7 @@ import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.repositories.PlaylistRepository;
 import com.teammusika.musika.repositories.SongRepository;
 import com.teammusika.musika.security.User;
+import com.teammusika.musika.services.PlaylistRepositoryService;
 import com.teammusika.musika.services.SongRepositoryService;
 import com.teammusika.musika.services.UserService;
 
@@ -33,7 +34,7 @@ import com.teammusika.musika.services.UserService;
 public class PlaylistController {
 
 	@Autowired
-	private PlaylistRepository playlistRepository;
+	private PlaylistRepositoryService playlistRepositoryService;
 	private UserService userService;
 	private User currentUser;
 
@@ -52,15 +53,16 @@ public class PlaylistController {
 	}
 
 	public class A{
+		public Long id;
 		public String name;
 		public List<SongObject> songs;
-		public A(String s, List<SongObject> o) {
-			this.name = s; this.songs = o;
+		public A(Long id,String s, List<SongObject> o) {
+			this.id = id;this.name = s; this.songs = o;
 		}
 	}
 	@ModelAttribute
 	public void addSongsToModel(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-		List<Playlist> playlists = playlistRepository.findAll();
+		List<Playlist> playlists = playlistRepositoryService.findAll();
 		List<A> a = new ArrayList<>();
 
 		for (Playlist playlist : playlists) {			
@@ -78,7 +80,7 @@ public class PlaylistController {
 				objecteds.add(new SongObject(file_string, image_string, song));
 				System.out.println(song.getSongTitle());
 			}
-			a.add(new A(playlist.getPlaylist_name(),objecteds));
+			a.add(new A(playlist.getPlaylistId(),playlist.getPlaylist_name(),objecteds));
 		}
 		model.addAttribute("playlists",a);
 	}
@@ -93,6 +95,11 @@ public class PlaylistController {
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage().toString());
 		}
+	}
+	@RequestMapping(value = "/user/playlist/{playlistId}", method = RequestMethod.DELETE)
+	public String deletePlaylist(@PathVariable("playlistId") Long id) {
+		playlistRepositoryService.deleteById(id);
+		return "redirect:/user/playlist";
 	}
 
 }

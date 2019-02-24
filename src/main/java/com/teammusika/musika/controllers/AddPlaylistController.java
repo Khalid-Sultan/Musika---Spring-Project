@@ -24,6 +24,7 @@ import com.teammusika.musika.domains.Song;
 import com.teammusika.musika.repositories.PlaylistRepository;
 import com.teammusika.musika.repositories.SongRepository;
 import com.teammusika.musika.security.User;
+import com.teammusika.musika.services.PlaylistRepositoryService;
 import com.teammusika.musika.services.SongRepositoryService;
 import com.teammusika.musika.services.UserService;
 
@@ -31,22 +32,17 @@ import com.teammusika.musika.services.UserService;
 @RequestMapping("user/addPlaylist")
 public class AddPlaylistController {
 
-	private SongRepository songRepository;
-	private PlaylistRepository playListRepository;
+	private SongRepositoryService songRepositoryService;
+	private PlaylistRepositoryService playListRepositoryService;
 	private UserService userService;
 	private User currentUser;
 
 	@Autowired
-	public AddPlaylistController(UserService userService, SongRepository songRepository,
-			PlaylistRepository playlistRepository) {
-		this.songRepository = songRepository;
+	public AddPlaylistController(UserService userService, SongRepositoryService songRepositoryService,PlaylistRepositoryService playlistRepositoryService) {
+		this.songRepositoryService = songRepositoryService;
 		this.userService = userService;
-		this.playListRepository = playlistRepository;
+		this.playListRepositoryService = playlistRepositoryService;
 	}
-
-	@Autowired
-	private SongRepositoryService songRepositoryService;
- 
 
 	@ModelAttribute
 	public void addSongsToModel(Model model) {
@@ -86,7 +82,7 @@ public class AddPlaylistController {
 		}
 //		myPlaylist.setUser(this.currentUser);
 		System.out.println("out");
-		Playlist savedTaco = playListRepository.save(myPlaylist);
+		Playlist savedTaco = playListRepositoryService.save(myPlaylist);
 		return "redirect:/user/playlist";
 
 	}

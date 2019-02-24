@@ -30,36 +30,130 @@
 	<div class="wrapper">
 
 		<!-- Sidebar  -->
-		<nav id="sidebar" th:insert="/fragments/adminAside.html"></nav>
-		<!--side bar ends here --!>
+		<nav id="sidebar" >
+		 <div class="sidebar-header">
+                <button type="button" id="sidebarCollapse" class="btn btn-info icon">
+                        <i class="fas fa-align-left"></i>
+                        <span class="icon_menu"></span>
+                    </button>
+                <h3>Musika</h3>
+                <strong>MK</strong>
+                <input type="search" name="search" class="form-control search" placeholder="Search">
+            </div>
+           <ul class="list-unstyled components">
+              <li id="search">
+                <a href="">
+                  <span class="icon_search min"></span>
+                </a>
+              
+              </li>
+               <li class="active">
+                   <a href="../admin/admin">
+                       <i class="fas fa-home"></i>
+                       <span class="icon_desktop" id="gliph"></span>
+                       <span class="icon_desktop min" id="gliph"></span>
+                       </button>
+                       <span class="list">Dash Board</span>
+                   </a>
+               </li>
+               <li>
+                   <a href="../admin/uploadSong">
+                       <i class="fas fa-briefcase"></i>
+                       <span class="icon_cloud-upload"></span>
+                       <span class="icon_cloud-upload min"></span>
+                       <span class="list">upload Song</span>
+                   </a>
+               </li>
+               <li>
+                   <a href="../admin/addArtist">
+                       <i class="fas fa-briefcase"></i>
+                       <span class="icon_contacts"></span>
+                       <span class="icon_contacts min"></span>
+                       <span class="list">Add Artist</span>
+                   </a>
+               </li>
+               <li>
+                   <a href="../admin/viewSongs">
+                       <i class="fas fa-briefcase"></i>
+                       <span class="icon_contacts"></span>
+                       <span class="icon_contacts min"></span>
+                       <span class="list">View Songs</span>                        
+                   </a>
+               </li>
+               <li>
+				<a href="../admin/viewArtists">
+			    	<i class="fas fa-briefcase"></i>
+			    	<span class="icon_contacts"></span>
+				    <span class="icon_contacts min"></span>
+				    <span class="list">View Artists</span>
+	   	        </a>
+	        </li>               
+        </ul>               
+		</nav>
+   		<!--side bar ends here --!>
 
         <!-- Page Content  -->
 		<div id="content">
-			<div th:insert="/fragments/adminHeader.html"></div>
-			<div class="main">
+			<div class="top-nav notification-row">
+		        <ul class="nav pull-right top-menu">
+		          <li id="alert_notification_bar" class="dropdown">
+		            <a data-toggle="dropdown" href="#">
+			            <i class="icon_mail right-icons"></i>
+			            <span class="badge bg-important">7</span>
+		            </a>
+		          </li>
+		          <li class="dropdown">
+		            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+			            <span class="icon_profile right-icons"></span>
+			            <span th:text="${user.getUsername()}" class="username">Jenifer Smith</span>
+		  	        </a>
+			        <ul class="dropdown-menu extended logout">
+		              <li class="eborder-top">
+		                <a href="#" class="icon-dropdown"><i class="icon_profile"></i> My Profile</a>
+		              </li>
+		              <li>
+		                <a th:href="@{/logout}" class="icon-dropdown"><i class="icon_key_alt"></i> Log Out</a>
+		              </li>
+		            </ul>
+		          </li>
+		         </ul>
+			</div>	
 
+			<div class="main">
 				<div class="container">
-					<form th:method="POST" th:action="@{/admin/addArtist}"
-						enctype="multipart/form-data">
+					<form method="post" th:action="@{/admin/addArtist}" enctype="multipart/form-data" th:object="${artistDesign}">
+				      <div th:if="${#fields.hasErrors()}">
+				        <span class="validationError">
+				        Please correct the problems below and re submit.
+				        </span>
+				      </div>
 						<div class="container">
 							<h3>Add artist</h3>
-
 							<div class="form-group row">
-								<label for="artistNameInput" class="col-sm-2 col-form-label">Artist
-									Name: </label> <input type="text" id="artistNameInput"
-									name="artistName" />
+								<label for="artistFullName" class="col-sm-2 col-form-label"> Artist Name: </label> 
+							      <input type="text" name="artistFullName" th:field="*{artistFullName}" required="required" autofocus="autofocus"/>
+							      <span class="validationError"
+							            th:if="${#fields.hasErrors('artistFullName')}"
+							            th:errors="*{artistFullName}">Name Error</span>
+							      <br/>
 							</div>
 							<div class="form-group row">
-								<label for="artistEmailInput" class="col-sm-2 col-form-label">Artist
-									E-mail: </label> <input type="text" id="artistEmailInput"
-									name="artistEmail" />
+								<label for="artistEmail" class="col-sm-2 col-form-label"> Artist E-mail: </label> 
+							      <input type="text" name="artistEmail" th:field="*{artistEmail}" required="required"/>
+							      <span class="validationError"
+							            th:if="${#fields.hasErrors('artistEmail')}"
+							            th:errors="*{artistEmail}">Email Error</span>
+							      <br/>
 							</div>
 							<div class="form-group row">
-								<label for="artistPhotoInput" class="col-sm-2 col-form-label">Artist
-									Photo: </label> <input type="file" id="artistPhotoInput"
-									name="artistPhoto" />
+								<label for="artistPhoto" class="col-sm-2 col-form-label"> Artist Photo: </label> 
+							      <input type="file" id="artistPhotoFile" name="artistPhoto" accept="image/*" required="required"/>
+<!-- 							      <span class="validationError" -->
+<!-- 							            th:if="${#fields.hasErrors('artistPhoto')}" -->
+<!-- 							            th:errors="*{artistPhoto}">Photo Error</span> -->
+							      <br/>
 							</div>
-							<input class="btn btn-primary" type="submit" value="Submit order" />
+							<button class="btn btn-primary" type="submit">Add Artist</button>
 						</div>
 					</form>
 				</div>

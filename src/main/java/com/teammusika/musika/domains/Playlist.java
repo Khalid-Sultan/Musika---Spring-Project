@@ -53,4 +53,8 @@ public class Playlist {
 	public void setSongs(Set<Song> songs) {
 		this.songs = songs;
 	}
+public Long getPlaylistId() {
+	return playlistId;
+}
+
 }

@@ -29,8 +29,8 @@
  			<form th:method="POST" th:action="@{/user/addPlaylist}" th:object="${playlistDesign}">
 				<div class="main">
 					<h4> Available Songs </h4>
-					<div th:each="song:${songModel}">
-						<div class="col-xl-3 col-sm-6 mb-3">
+					<div class="row">
+						<div th:each="song:${songModel}" class="col-xl-3 col-sm-6 mb-3"> 
 							<div class="card text-white o-hidden h-100">
 								<div class="card-body">
 									<img th:src="@{'data:image/jpeg;base64,'+${song.songCover}}">
@@ -39,7 +39,7 @@
 									<input name="songs" type="checkbox" th:value="${song.songId}" class="float-right" /> 
 									<span class="float-left title" th:text="${song.songTitle}">Song Name</span>
 								</span>
-							</div>
+							</div> 
 						</div>
 					</div>
 				</div>

@@ -33,37 +33,61 @@
         <!-- Page Content  -->
 		<div id="content">
 			<div th:insert="/fragments/adminHeader.html"></div>
-
 			<div class="main">
-
 				<div class="container">
-					<form th:method="POST" th:action="@{/admin/uploadSongs}"
-						enctype="multipart/form-data" th:object="${artistArray}">
-						<h3>Upload Song</h3>
 
-						<div class="form-group row">
-							<label for="singleFileArtistInput"
-								class="col-sm-2 col-form-label">Artist Name: </label> <input
-								type="text" id="singleFileArtistInput" name="songArtist" />
+				<form th:method="POST" th:action="@{/admin/uploadSong}" enctype="multipart/form-data" th:object="${songDesign}">
+				      <div th:if="${#fields.hasErrors()}">
+				        <span class="validationError">
+				        Please correct the problems below and re submit.
+				        </span>
+				      </div>
+						<div class="container">
+							<h3>Upload Song</h3>
+							<div class="form-group row">							
+								<label for="songTitle" class="col-sm-2 col-form-label"> Song Title: </label> 
+							      <input type="text" name="songTitle" th:field="*{songTitle}" required="required" autofocus="autofocus"/>
+							      <span class="validationError"
+							            th:if="${#fields.hasErrors('songTitle')}"
+							            th:errors="*{songTitle}">Name Error</span>
+							      <br/>
+							</div>
+							<div class="form-group row">							
+								<label for="songArtists" class="col-sm-2 col-form-label"> Artist Names: </label> 
+							      <input type="text" name="songArtists" th:field="*{songArtists}" required="required" />
+							      <span class="validationError"
+							            th:if="${#fields.hasErrors('songArtists')}"
+							            th:errors="*{songArtists}">Name Error</span> 
+							      <br/>
+							</div>
+							<div class="form-group row">
+								<label for="albumTitle" class="col-sm-2 col-form-label"> Album Title: </label> 
+							      <input type="text" name="albumTitle" th:field="*{albumTitle}" required="required"/>
+							      <span class="validationError"
+							            th:if="${#fields.hasErrors('albumTitle')}"
+							            th:errors="*{albumTitle}">Album Title Error</span>
+							      <br/>
+							</div>
+							<div class="form-group row">
+								<label for="songFile" class="col-sm-2 col-form-label"> Song File: </label> 
+							      <input type="file" id="songFile" name="songFile" accept="audio/*" required="required"/>
+<!-- 							      <span class="validationError" -->
+<!-- 							            th:if="${#fields.hasErrors('artistPhoto')}" -->
+<!-- 							            th:errors="*{artistPhoto}">Photo Error</span> -->
+							      <br/>
+							</div>
+							<div class="form-group row">
+								<label for="coverFile" class="col-sm-2 col-form-label"> Song Photo: </label> 
+							      <input type="file" id="coverFile" name="coverFile" accept="image/*" required="required"/>
+<!-- 							      <span class="validationError" -->
+<!-- 							            th:if="${#fields.hasErrors('artistPhoto')}" -->
+<!-- 							            th:errors="*{artistPhoto}">Photo Error</span> -->
+							      <br/>
+							</div>
+							<button class="btn btn-primary" type="submit">Upload Song</button>
 						</div>
-						<div class="form-group row">
-							<label for="singleFileAlbumInput" class="col-sm-2 col-form-label">Album
-								Name: </label> <input type="text" id="singleFileAlbumInput"
-								name="songAlbum" />
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Song File: </label> <input
-								type="file" id="singleFileUploadInput" name="songFile" />
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Cover Photo: </label> <input
-								type="file" id="singleFileCoverInput" name="coverFile" />
-						</div>
-						<input type="submit" class="btn btn-primary" value="Submit order" />
 					</form>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
