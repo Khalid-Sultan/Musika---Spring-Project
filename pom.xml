@@ -7,8 +7,8 @@
 	<groupId>com.teammusika</groupId>
 	<artifactId>musika</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-<!-- 	<packaging>war</packaging> -->
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
+<!-- 	<packaging>jar</packaging> -->
 
 
 	<name>musika</name>

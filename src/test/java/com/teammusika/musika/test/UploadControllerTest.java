@@ -12,24 +12,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(com.teammusika.musika.controllers.IndexController.class)  
-public class IndexControllerTest {
+@WebMvcTest(com.teammusika.musika.controllers.UploadController.class)
+public class UploadControllerTest {
 
-  @Autowired
-  private MockMvc mockMvc;   
+	@Autowired
+	private MockMvc mockMvc;
 
-  @Test
-  public void testIndexPage() throws Exception {
-    mockMvc.perform(get("/"))   
-    
-      .andExpect(status().isOk()) 
-      
-      .andExpect(view().name("index"));
-      
-  }
+	@Test
+	public void testUploadSongPage() throws Exception {
+		mockMvc.perform(get("/admin/uploadSong"))
+
+				.andExpect(status().isOk())
+
+				.andExpect(view().name("uploadSong"))
+
+				.andExpect(content().string(containsString("File")));
+	}
 
 }

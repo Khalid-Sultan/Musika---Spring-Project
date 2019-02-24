@@ -12,24 +12,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(com.teammusika.musika.controllers.IndexController.class)  
-public class IndexControllerTest {
+@WebMvcTest(com.teammusika.musika.controllers.PlaylistController.class)
+public class PlaylistControllerTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
 
-  @Autowired
-  private MockMvc mockMvc;   
+	@Test
+	public void testPlaylistPage() throws Exception {
+		mockMvc.perform(get("/playlist"))
 
-  @Test
-  public void testIndexPage() throws Exception {
-    mockMvc.perform(get("/"))   
-    
-      .andExpect(status().isOk()) 
-      
-      .andExpect(view().name("index"));
-      
-  }
+				.andExpect(status().isOk())
+
+				.andExpect(view().name("playlist"))
+
+				.andExpect(content().string(containsString("playlist")));
+	}
 
 }

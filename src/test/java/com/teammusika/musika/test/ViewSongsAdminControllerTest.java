@@ -16,20 +16,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(com.teammusika.musika.controllers.IndexController.class)  
-public class IndexControllerTest {
+@WebMvcTest(com.teammusika.musika.controllers.ViewSongsAdminController.class)  
+public class ViewSongsAdminControllerTest {
 
   @Autowired
   private MockMvc mockMvc;   
-
   @Test
-  public void testIndexPage() throws Exception {
-    mockMvc.perform(get("/"))   
+  public void testViewSongsAdminPage() throws Exception {
+    mockMvc.perform(get("/admin/viewSongs"))   
     
       .andExpect(status().isOk()) 
       
-      .andExpect(view().name("index"));
+      .andExpect(view().name("viewSongs"))  
       
+      .andExpect(content().string(       
+          containsString("Song")));  
   }
 
 }
